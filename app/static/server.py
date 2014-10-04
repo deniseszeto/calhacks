@@ -7,5 +7,5 @@ from random import choice
 app = Flask(__name__)
 
 @app.route('/', methods = ["GET"])
-def maain_page():
+def main_page():
    return render_template('index.html')
