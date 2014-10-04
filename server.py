@@ -8,4 +8,4 @@ app = Flask(__name__)
 
 @app.route('/', methods = ["GET"])
 def maain_page():
-   return redirect(url_for('static', filename='index.html'))
+   return app.send_static_file('index.html')
