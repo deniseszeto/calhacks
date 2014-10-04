@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href= "{{ url_for('static', filename='favicon.ico') }}" />
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -33,16 +34,11 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container" id="navbar_container">
             <!-- Brand and toggle get grouped for better mobile display -->
+            <img src="{{ url_for('static', filename='favicon69.png') }}" id ="logo">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Some Recipe-Related Name</a>
+            <a class="navbar-brand" href="#">Some Recipe-Related Name</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,21 +48,42 @@
                     </li>
                 </ul>
             </div>
+            <div>
+                <form role="form">
+                    <input type="text" class="form-control" id="recipe" placeholder="What do you want to make?">
+                </form>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
 
     <!-- Header -->
-    <div class="intro-header">
+    <div class="body">
 
         <div class="container">
+            <div class="row-fluid">
+                <div class="col-md-4">
+                    Ingredients
+                    <form class="form-horizontal" role="form">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" value="">
+                            63 eggs
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" value="">
+                            Beer
+                          </label>
+                        </div>
+                    </form>
+                </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <iframe width="600" height="450" frameborder="0" style="border:0" id ="gmap"></iframe>
-                    </div>
+                <div class="col-md-8">
+                    Buy yo shit here<br>
+                    <iframe allowtransparency="true" style="background: #E9E5DC;" width="100%" height="450" frameborder="0" style="border:0" id ="gmap"></iframe>
                 </div>
             </div>
 
@@ -99,7 +116,7 @@
                             <a href="#contact">Contact</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Made at Cal Hacks 2014. </p>
                 </div>
             </div>
         </div>
@@ -116,6 +133,7 @@
     var y=document.getElementById("gmap");
     function getLocation()
       {
+        console.log("got location");
       if (navigator.geolocation)
         {
         navigator.geolocation.watchPosition(setLocation);
@@ -126,8 +144,7 @@
       {
         y.src="https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+"&destination=Safeway%2C%20Shattuck%20Place%2C%20Berkeley%2C%20CA%2C%20United%20States&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
       }
-    getLocation();
-
+    window.onload = function(){getLocation();};
     </script>
 </body>
 
