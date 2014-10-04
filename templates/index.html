@@ -50,7 +50,7 @@
             </div>
             <div>
                 <form role="form" action="." method="POST">
-                    <input type="text" class="form-control" id="recipe" placeholder="What do you want to make?">
+                    <input type="text" class="form-control" id="recipe" placeholder="What do you want to make?" name="input" value="">
                 </form>
             </div>
             <!-- /.navbar-collapse -->
@@ -64,6 +64,7 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="col-md-4">
+                    <h3>{{ recipename }}</h3>
                     Ingredients
                     <form class="form-horizontal" role="form">
                         <div class="checkbox">
