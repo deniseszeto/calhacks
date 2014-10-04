@@ -1,19 +1,24 @@
+# -*- coding: utf-8 -*-
+
 from urllib.request import urlopen
 from xml.dom.minidom import parse
 from random import randint
 
-def parsePage(url, tag=""):
+def parsePage(url, tags=[]):
     """ Returns the parsed xml and optionally the value of a tag. """
     
     page = urlopen(url)
     xml = parse(page)
-    if tag == "":
+    if not tags:
         return xml
-    else:
-        return xml, xml.getElementsByTagName(tag)[0].firstChild.nodeValue
+    
+    for i in range(len(tags)):
+        tags[i] = xml.getElementsByTagName(tags[i])[0].firstChild.nodeValue
+
+    return xml, tags
 
 def findRecipe(keywords="Calhacks"):
-    """ Returns a tuple (Recipe Name, Set of Ingredients). """
+    """ Returns (Recipe Name, Set of Ingredients, Instructions). """
     
     apiKey = "dvxI9e588cOKNvbOzd24EXsVRW9Y2OW8"
 
@@ -26,7 +31,7 @@ def findRecipe(keywords="Calhacks"):
     # Adding the developer's API Key
     url += "&api_key=" + apiKey
 
-    recipeCount = parsePage(url, 'ResultCount')[1]
+    recipeCount = parsePage(url, ['ResultCount'])[1][0]
     
     # No recipes are found.
     if recipeCount == "0":
@@ -35,16 +40,16 @@ def findRecipe(keywords="Calhacks"):
     randomRecipe = randint(1, int(recipeCount))
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
 
-    recipeID = parsePage(url, 'RecipeID')[1]
+    recipeID = parsePage(url, ['RecipeID'])[1][0]
     
     # Return the list of ingredients in the Recipe
     recipe_url = "http://api.bigoven.com/recipe/" + recipeID
     recipe_url += "?api_key=" + apiKey
 
-    xml, recipe_title = parsePage(recipe_url, 'Title')
+    xml, [title, inst] = parsePage(recipe_url, ['Title', 'Instructions'])
 
     recipe_list = set()
     for el in xml.getElementsByTagName('Name'):
         recipe_list.add(el.firstChild.nodeValue)
 
-    return recipe_title, recipe_list
+    return title, recipe_list, inst
