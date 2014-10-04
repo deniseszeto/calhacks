@@ -1,5 +1,2 @@
-<<<<<<< HEAD
-web: gunicorn app/server.py --log-file=-
-=======
-web: gunicorn app/server:app --log-file=-
->>>>>>> ec6192c8e316a7b8131e18c59f5743fa24e2848d
+web: gunicorn app.server:app --log-file=-
+
