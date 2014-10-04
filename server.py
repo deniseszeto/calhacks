@@ -7,5 +7,11 @@ from random import choice
 app = Flask(__name__)
 
 @app.route('/', methods = ["GET"])
-def maain_page():
-   return render_template('index.html')
+def main_page():
+    return render_template('index.html')
+
+@app.route('/', methods=['POST'])
+def recipe_post():
+    text = request.form['input']
+    processed_text = text.upper()
+    return processed_text

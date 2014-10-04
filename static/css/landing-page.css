@@ -36,6 +36,16 @@ h6 {
     padding-left:100px;
 }
 
+#recipe {
+    padding-top:4px;
+    padding-left:18px;
+}
+
+#recipe>li {
+    font-weight: 400;
+    padding-top:4px;
+}
+
 .body {
     padding-top: 120px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
