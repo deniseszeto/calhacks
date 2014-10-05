@@ -58,7 +58,10 @@ def findRecipe(keywords="Calhacks"):
     xml, [title, inst] = parsePage(recipeUrl, ['Title', 'Instructions'])
 
     recipeList = set()
-    for el in parseList(xml, 'Name'):
-        recipeList.add(el.firstChild.nodeValue)
+    try:
+        for el in parseList(xml, 'Name'):
+            recipeList.add(el.firstChild.nodeValue)
+    except AttributeError:
+        recipeList.add("Ingredients are in the Instructions")
 
     return title, recipeList, cuisineType, inst

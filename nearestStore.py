@@ -21,10 +21,20 @@ def nearestStore(cuisineType, latitude, longitude):
 
     xml = ET.parse(urlopen(url))
     root = xml.getroot()
+    
+    """
     try:
         location = root.find("result").find("geometry").find("location")
     except AttributeError:
         return "THIS SHOULD NOT HAPPEN", "THIS SHOULD NOT HAPPEN"
     
     return location.find("lat").text, location.find("lng").text
-    
+    """
+
+    try:
+        result = root.find("result")
+    except AttributeError:
+        return "THIS SHOULD NOT HAPPEN"
+
+    address = result.find("name").text + "+" + result.find("vicinity").text
+    return address.replace(" ", "+")
