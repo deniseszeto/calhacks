@@ -59,16 +59,16 @@
                     <img src="{{ url_for('static', filename='favicon66.png') }}" id ="logo">
                 </div>
                 <div class="navbar-header">
-                <a class="navbar-brand" href="#">Some Recipe-Related Name</a>
+                <div class="navbar-brand" style="color: #333;">Some Recipe-Related Name</div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse desktop-only" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">Help</a>
+                            <a data-toggle="modal" data-target="#Help">Help</a>
                         </li>
                         <li>
-                            <a href="#">About</a>
+                            <a data-toggle="modal" data-target="#About">About</a>
                         </li>
                     </ul>
                 </div>
@@ -89,12 +89,12 @@
         <!-- Header -->
         <div class="body">
             <div class="container">
-            {% if address %}
-            <div id="backgroundcolor"></div>
-            {% endif %}
+                {% if address %}
+                  <div id="backgroundcolor"></div>
+                {% endif %}
                 <div class="row-fluid">
                     <div class="col-md-4">
-                        <h3>{{ recipename }}</h3>
+                        <h4>{{ recipename }}</h4>
                         {% if ingred %}
                         Ingredients
                         {% endif %}
@@ -130,11 +130,59 @@
     </div>
 
     <div id="footer">
-      <div class="container">
-        <p class="text-muted">Made at Cal Hacks 2014.</p>
+        <div class="container desktop-only">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <p class="text-muted">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</p>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mobile-only">
+            <span class="text-muted" style="float:left;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
+            <span style="float:right;"> <a data-toggle="modal" data-target="#Help">Help</a>&emsp;<a data-toggle="modal" data-target="#About">About</a></span>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" id="Help" tabindex="-1" role="dialog" aria-labelledby="HelpLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="HelpLabel">Need help?</h4>
+          </div>
+          <div class="modal-body">
+            <ol>
+                <li>
+                    Type in what recipe you want to make today and hit enter.
+                </li>
+                <li>
+                    Check off which ingredients you have already.
+                </li>
+                <li>
+                    We'll show you the closest grocery store to buy the remaining ingredients!
+                </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
 
+    <div class="modal fade bs-example-modal-sm" id="About" tabindex="-1" role="dialog" aria-labelledby="AboutLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="AboutLabel">About Us</h4>
+          </div>
+          <div class="modal-body">
+            <p>This web app makes use of the BigOven, Supermarket, Google Maps, Google Places, and AWS APIs.</p>
+            <p>Developed by Jackson Chang, Jinsu Choi, Kai Si, and Denise Szeto at Cal Hacks 2014.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- jQuery Version 1.11.0 -->
     <script src="{{ url_for('static', filename='js/jquery-1.11.0.js') }}"></script>
@@ -158,7 +206,7 @@
         {% if address %}
         $map = $('#mapgoeshere');
         if ($map.children().length == 0) {
-            $('<iframe width="100%" height="'+($(window).height()-200)+'px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin='+position.coords.latitude +"%2C"+position.coords.longitude+'&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4">').appendTo($('#mapgoeshere'));
+            $('<iframe width="100%" height="450px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin='+position.coords.latitude +"%2C"+position.coords.longitude+'&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4">').appendTo($('#mapgoeshere'));
         }
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;

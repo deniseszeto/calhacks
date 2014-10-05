@@ -7,9 +7,7 @@ app = Flask(__name__)
 
 @app.route('/', methods = ["GET", "POST"])
 def main_page():
-    if request.method == "GET":
-        return render_template('index.html', input="", recipename="", ingred=set(), recipe="", address="")
-    else:
+    if request.method == "POST" and request.form['input'] != "":
         inputrecipe = request.form['input']
         inputlat = request.form['lat']
         inputlong = request.form['long']
@@ -18,6 +16,8 @@ def main_page():
         print(address)
         return render_template('index.html', input=inputrecipe, recipename=name,
                                ingred=ingredients, recipe=instructions, address=address)
+    else:
+        return render_template('index.html', input="", recipename="", ingred=set(), recipe="", address="")
 
 if __name__ == '__main__':
     app.debug = True
