@@ -48,7 +48,7 @@ def findRecipe(keywords="Calhacks"):
     
     try:
         cuisineType = parseList(xml, 'Cuisine')[0].firstChild.nodeValue
-    except IndexError:
+    except (IndexError, AttributeError):
         cuisineType = ""
     
     # Return the list of ingredients in the Recipe
