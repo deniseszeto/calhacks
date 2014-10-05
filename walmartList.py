@@ -35,7 +35,7 @@ def createCart(toolsList=[]):
                     rating = item.find("customerRating").text
                     reviews = item.find("numReviews").text
                 except AttributeError:
-                    rating, reviews = "0", "0"
+                    rating, reviews = "3", "0"
                     
                 value = heuristic(salePrice, rating, reviews)
                 if value > epsilon:
