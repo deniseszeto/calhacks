@@ -44,7 +44,7 @@ def findRecipe(keywords="Calhacks"):
     randomRecipe = randint(1, int(recipeCount))
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
 
-    xml, recipeId = parsePage(url, ['RecipeID'])[1][0]
+    xml, [recipeId] = parsePage(url, ['RecipeID'])
 
     try:
         cuisineType = parseList(xml, 'Cuisine')[0].firstChild.getValue
