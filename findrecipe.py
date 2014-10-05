@@ -37,9 +37,9 @@ def findRecipe(keywords="Calhacks"):
 
     recipeCount = parsePage(url, ['ResultCount'])[1][0]
     
-    # No recipes are found.
+    # No recipes are found. 
     if recipeCount == "0":
-        return keywords, set(["No such recipe found"])
+        return keywords, set(["No such recipe found"]), ""
 
     randomRecipe = randint(1, int(recipeCount))
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
