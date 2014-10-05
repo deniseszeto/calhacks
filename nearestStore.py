@@ -38,14 +38,15 @@ def nearestStore(cuisineType, latitude, longitude):
 
     try:
         i = randint(1, RANDOM_NEAREST)
+        currStore = ""
         for el in root.findall("result"):
-            if i == 1:
+            store = el.find("name").text
+            if i <= 1 and currStore != store:
                 result = el
                 break
             else:
-                i -= 1
+                currStore, i = store, i - 1
     except AttributeError:
         return "THIS SHOULD NOT HAPPEN"
 
-    address = result.find("name").text + "+" + result.find("vicinity").text
-    return address.replace(" ", "+")
+    return (store + "+" + result.find("vicinity").text).replace(" ", "+")
