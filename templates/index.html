@@ -130,12 +130,12 @@
     </div>
 
     <div id="footer">
-        <div class="container desktop-only">
+        <div class="container desktop-only" style="display:none;">
             <form action="/list" method="POST">
-                <div class="searchbar" style="float:left;width:40%;">
+                <div class="searchbar desktop-only" style="float:left;width:50%;">
 
-                    <input type="text" style="width:50%;float: left;" class="form-control " id="shoppinglist" name="shoppinglist" placeholder="What items do you need to buy?" value= "{{ needtobuy }}">
-                    <input type="submit" style="width:20%;float: left;margin: 3px;" id="walmart" name="walmart" value="Walmart"
+                    <input type="text" class="desktop-only" style="width:50%;float: left;margin-top:3px" class="form-control " id="shoppinglist" name="shoppinglist" placeholder="What items do you need to buy?" value= "{{ needtobuy }}">
+                    <input type="submit" class="desktop-only" style="width:20%;float: left;margin: 3px;" id="walmart" name="walmart" value="Walmart"
                     {% if walmart %}
                         data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" data-content="
                         {% for link in walmart %}
@@ -145,7 +145,7 @@
                     {% endif %}
                     >
 
-                    <input type="submit" style="width:20%;float: left;margin: 3px;" name="amazon" id="amazon" value="Amazon"
+                    <input type="submit" class="desktop-only" style="width:20%;float: left;margin: 3px;" name="amazon" id="amazon" value="Amazon"
                     {% if amazon %}
                         data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" data-content="
                         <p><a href='{{ amazon }}'><img src='https://images-na.ssl-images-amazon.com/images/G/01/x-locale/communities/reminder/v2/continue._V192249955_.gif' border='0' alt='Go to Amazon Cart'></a></p>
@@ -161,11 +161,11 @@
                 </div>
             </form>
             
-            <span class="text-muted" style="float:right;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
+            <span class="text-muted" style="float:right;margin-top:-7pt">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
         </div>
         <div class="container mobile-only">
-            <span class="text-muted" style="float:left;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
-            <span style="float:right;"> <a data-toggle="modal" data-target="#Help">Help</a>&emsp;<a data-toggle="modal" data-target="#About">About</a></span>
+            <span class="text-muted mobile-only" style="float:left;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
+            <span style="float:right;" class="mobile-only"> <a data-toggle="modal" data-target="#Help">Help</a>&emsp;<a data-toggle="modal" data-target="#About">About</a></span>
         </div>
     </div>
 
@@ -187,7 +187,7 @@
                 <li>
                     We'll show you the closest grocery store to buy the remaining ingredients!
                 </li>
-                <li class="desktop-only" style="display: list-item;">
+                <li class="list-desktop-only" style="display:none;">
                     Or you can type the items that you're missing into the textbox, and we'll generate an Amazon list for you!
                 </li>
             </ol>

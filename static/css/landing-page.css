@@ -138,6 +138,9 @@ h6 {
     .mobile-only {
         display:none !important;
     }
+    .list-desktop-only {
+        display: list-item !important;
+    }
 }
  
 //small screen sizes
@@ -147,6 +150,10 @@ h6 {
     }
  
     .desktop-only {
+        display:none !important;
+    }
+
+    .list-desktop-only {
         display:none !important;
     }
 }
