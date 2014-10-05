@@ -36,7 +36,14 @@ h6 {
     padding-left:100px;
 }
 
-
+#space {
+    position: fixed; 
+    top: 100px; /*Set top value to HeightOfTopFrameDiv*/
+    margin-left:auto;
+    margin-right: auto;
+    bottom: 110px; /*Set bottom value to HeightOfBottomFrameDiv*/
+    overflow: auto;
+}
 
 .recipe {
     font-weight: 400;

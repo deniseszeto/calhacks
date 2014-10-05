@@ -96,11 +96,11 @@
 
                 <div class="col-md-7 col-md-offset-1">
                     {% if address %}
-                    Buy yo shit here<br>
+                    <br>
                     <iframe allowtransparency="true" style="background: #E9E5DC;"
                      width="100%" height="70%" frameborder="0" style="border:0" id ="gmap"></iframe>
                     {% else %}
-                    <div style="margin: 0;padding: 0;border: 0;overflow: hidden;height: 100%; max-height: 100%;"> </div>
+                    <div id="space"></div>
                     {% endif %}
                 </div>
             </div>
@@ -150,6 +150,10 @@
     var x=document.getElementById("demo");
     {% if address %}
     var y=document.getElementById("gmap");
+    {% else %}
+    $(document).ready(function(){
+        $('#space').height($(window).height()-98-88-21-50-1);
+    });
     {% endif %}
     function getLocation()
       {
@@ -163,14 +167,18 @@
     function setLocation(position) 
       {
         {% if address %}
-        y.src="https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+"&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
+        y.src = "https://www.google.com/maps/embed/v1/directions?
+                 origin="+position.coords.latitude +"%2C"+position.coords.longitude+
+               "&destination={{address}}
+                &key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;
         document.getElementById("long").value=position.coords.longitude;
       }
-        window.onload = function(){getLocation();};
+      window.onload = function(){getLocation();};
       
     </script>
+
 </body>
 
 </html>
