@@ -44,10 +44,10 @@ def findRecipe(keywords="Calhacks"):
     randomRecipe = randint(1, int(recipeCount))
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
 
-    recipeId = parsePage(url, ['RecipeID'])[1][0]
+    xml, recipeId = parsePage(url, ['RecipeID'])[1][0]
 
     try:
-        cuisineType = parsePage(url, ['Cuisine'])[1][0]
+        cuisineType = parseList(xml, 'Cuisine')[0].firstChild.getValue
     except:
         cuisineType = ""
     
