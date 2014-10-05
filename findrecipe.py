@@ -45,16 +45,16 @@ def findRecipe(keywords="Calhacks"):
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
 
     xml, [recipeId] = parsePage(url, ['RecipeID'])
-
+    
     try:
-        cuisineType = parseList(xml, 'Cuisine')[0].firstChild.getValue
-    except:
+        cuisineType = parseList(xml, 'Cuisine')[0].firstChild.nodeValue
+    except IndexError:
         cuisineType = ""
     
     # Return the list of ingredients in the Recipe
     recipeUrl = "http://api.bigoven.com/recipe/" + recipeId
     recipeUrl += "?api_key=" + apiKey
-
+    
     xml, [title, inst] = parsePage(recipeUrl, ['Title', 'Instructions'])
 
     recipeList = set()

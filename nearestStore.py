@@ -2,6 +2,8 @@ from urllib.request import urlopen
 import xml.etree.ElementTree as ET
 
 def nearestStore(cuisineType, latitude, longitude):
+    """ Returns a nearby relevant supermarket by Name + Address. """
+    
     apiKey = "AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4"
 
     # Base URL for Google Places API
