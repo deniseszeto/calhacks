@@ -10,8 +10,8 @@ def createCart (objectList):
 
 
 def getXML (keyword):
-	AWS_KEY = "AKIAJJ33ZJJDAAXLV2QA"
-	AWS_SECRET_KEY = "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"
+	AWS_KEY = ""
+	AWS_SECRET_KEY = ""
 
 	base_url = "http://webservices.amazon.com/onca/xml?"
 	url_params = dict(
