@@ -54,7 +54,7 @@ h6 {
 }
 
 #navbar_container {
-    padding: 0px 100px;
+    padding-left:100px;
 }
 
 .recipe {
@@ -116,14 +116,37 @@ h6 {
 
 #push,
 #footer {
-    padding: 10px 185px;
+    padding: 10px 0px;
     height: 40px;
 }
 #footer {
     position: relative;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    display: block;
     background-color: #E6E8FE;
     border-color: #B4B9FE;
     border-width: 1px 0 0;
     border-style: solid;
 }
 
+@media (min-width:992px) {
+    .desktop-only {
+        display:block !important;
+    }
+    .mobile-only {
+        display:none !important;
+    }
+}
+ 
+//small screen sizes
+@media (max-width: 991px) {
+    .mobile-only {
+        display:block !important;
+    }
+ 
+    .desktop-only {
+        display:none !important;
+    }
+}

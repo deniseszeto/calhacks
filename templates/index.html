@@ -62,7 +62,7 @@
                 <div class="navbar-brand" style="color: #333;">Some Recipe-Related Name</div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse desktop-only" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a data-toggle="modal" data-target="#Help">Help</a>
@@ -130,17 +130,26 @@
     </div>
 
     <div id="footer">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <p class="text-muted">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</p>
-          </li>
-        </ul>
+        <div class="container desktop-only">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li>
+                    <p class="text-muted">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</p>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mobile-only">
+            <span class="text-muted" style="float:left;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
+            <span style="float:right;"> <a data-toggle="modal" data-target="#Help">Help</a>&emsp;<a data-toggle="modal" data-target="#About">About</a></span>
+        </div>
     </div>
 
     <div class="modal fade bs-example-modal-sm" id="Help" tabindex="-1" role="dialog" aria-labelledby="HelpLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="HelpLabel">Need help?</h4>
           </div>
           <div class="modal-body">
@@ -156,9 +165,6 @@
                 </li>
             </ol>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
         </div>
       </div>
     </div>
@@ -167,14 +173,12 @@
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" id="AboutLabel">About Us</h4>
           </div>
           <div class="modal-body">
             <p>This web app makes use of the BigOven, Supermarket, Google Maps, Google Places, and AWS APIs.</p>
             <p>Developed by Jackson Chang, Jinsu Choi, Kai Si, and Denise Szeto at Cal Hacks 2014.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
