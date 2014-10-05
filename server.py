@@ -10,10 +10,10 @@ def main_page():
         return render_template('index.html', input="", recipename="", ingred=set(), recipe="")
     else:
         inputrecipe = request.form['input']
-        name, ingredients, instructions = findRecipe(inputrecipe)
+        name, ingredients, ctype, instructions = findRecipe(inputrecipe)
         return render_template('index.html', input=inputrecipe, recipename=name,
                                ingred=ingredients, recipe=instructions)
 
 if __name__ == '__main__':
-    #app.debug = True
+    app.debug = True
     app.run(port=5555)
