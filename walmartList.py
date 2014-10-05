@@ -10,7 +10,7 @@ def heuristic(salePrice, rating, reviews):
     return 20.0 / salePrice + log((rating + 1.0) * (reviews + 20.0))
 
 def createCart(toolsList=[]):
-    """ Returns a list of urls from input list of tools. """
+    """ Returns a list of (tool, url) from input list of tools. """
     
     apiKey = "bqrefaq33zj9dk59nw9hz62g"
 
@@ -24,7 +24,7 @@ def createCart(toolsList=[]):
     url += "&sort=price&ord=asc"
 
     returnList = []
-    epsilon, prodUrl = 0, ""
+    epsilon, prodName, prodUrl = 0, "", ""
     for tool in toolsList:
         xml = ET.parse(urlopen(url + "&query=" + tool.replace(" ", "+")))
         root = xml.getroot()
@@ -40,9 +40,10 @@ def createCart(toolsList=[]):
                 value = heuristic(salePrice, rating, reviews)
                 if value > epsilon:
                     epsilon = value
+                    prodName = item.find("name").text
                     prodUrl = item.find("productUrl").text
             endUrl = prodUrl.find("%3F")
-            returnList.append(unquote(prodUrl[37:endUrl]))
+            returnList.append((prodName, unquote(prodUrl[37:endUrl])))
             epsilon = 0
             
     return returnList
