@@ -4,12 +4,11 @@ import findrecipe
 
 app = Flask(__name__)
 
-@app.route('/', methods = ["GET"])
+@app.route('/', methods = ["GET", "POST"])
 def main_page():
-    return render_template('index.html', input="", recipename="Beerd Eggs")
-
-@app.route('/', methods=['POST'])
-def recipe_post():
-    inputrecipe = request.form['input']
-    name, ingredients, instructions = findRecipe(inputrecipe)
-    return render_template('index.html', input=inputrecipe, recipename=name)
+    if request.method == "GET":
+        return render_template('index.html', input="", recipename="Beer Eggs")
+    else:
+        inputrecipe = request.form['input']
+        name, ingredients, instructions = findRecipe(inputrecipe)
+        return render_template('index.html', input=inputrecipe, recipename=name)
