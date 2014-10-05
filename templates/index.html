@@ -116,15 +116,8 @@
                         </p>
                     </div>
 
-                    <div class="col-md-7 col-md-offset-1">
-                        {% if address %}
-                        <br>
-                        <div style='position: relative; width: 100%; height: 0px; padding-bottom: 60%;'>
-                        <iframe allowtransparency="true" style='position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: #E9E5DC;%' frameborder="0" style="border:0" id ="gmap"></iframe>
-                         </div>
-                        {% else %}
-                        <div id="space"></div>
-                        {% endif %}
+                    <div class="col-md-7 col-md-offset-1" id="mapgoeshere">
+                        
                     </div>
                 </div>
 
@@ -151,9 +144,6 @@
 
     <script>
     var x=document.getElementById("demo");
-    {% if address %}
-    var y=document.getElementById("gmap");
-    {% endif %}
     function getLocation()
       {
         console.log("got location");
@@ -166,8 +156,7 @@
     function setLocation(position) 
       {
         {% if address %}
-        y.src = "https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+
-               "&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
+        $('<iframe width="100%" height="70%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin='+position.coords.latitude +"%2C"+position.coords.longitude+'&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4">').appendTo($('#mapgoeshere'));
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;
         document.getElementById("long").value=position.coords.longitude;
