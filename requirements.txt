@@ -1,4 +1,4 @@
-Setuptools==3.6
+Setuptools==5.4.1
 Pip==1.5.6
 Flask==0.10.1
 Jinja2==2.7.3
