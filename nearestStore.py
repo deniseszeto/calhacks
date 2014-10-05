@@ -1,8 +1,11 @@
 from urllib.request import urlopen
 import xml.etree.ElementTree as ET
+from random import randint
 
 def nearestStore(cuisineType, latitude, longitude):
     """ Returns a nearby relevant supermarket by Name + Address. """
+
+    RANDOM_NEAREST = 3
     
     apiKey = "AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4"
 
@@ -23,7 +26,7 @@ def nearestStore(cuisineType, latitude, longitude):
 
     xml = ET.parse(urlopen(url))
     root = xml.getroot()
-    
+
     """
     try:
         location = root.find("result").find("geometry").find("location")
@@ -34,7 +37,13 @@ def nearestStore(cuisineType, latitude, longitude):
     """
 
     try:
-        result = root.find("result")
+        i = randint(1, RANDOM_NEAREST)
+        for el in root.findall("result"):
+            if i == 1:
+                result = el
+                break
+            else:
+                i -= 1
     except AttributeError:
         return "THIS SHOULD NOT HAPPEN"
 
