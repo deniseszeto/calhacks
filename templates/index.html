@@ -67,25 +67,24 @@
                     <h3>{{ recipename }}</h3>
                     Ingredients
                     <form class="form-horizontal" role="form">
+                        {% for item in ingred %}
                         <div class="checkbox">
                           <label>
                             <input type="checkbox" value="">
-                            63 eggs
+                            {{ item }}
                           </label>
                         </div>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="">
-                            Beer
-                          </label>
-                        </div>
+                        {% endfor %}
                     </form>
                     Recipe:
-                    <ol type="1" id="recipe">
+                    <p class="recipe">
+                    {{ recipe }}
+                    </p>
+    <!--                 <ol type="1" class="recipe">
                       <li>Coffee</li>
                       <li>Tea
                       <li>Milk</li>
-                    </ol>
+                    </ol> -->
                 </div>
 
                 <div class="col-md-8">

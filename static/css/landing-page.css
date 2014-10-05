@@ -36,12 +36,12 @@ h6 {
     padding-left:100px;
 }
 
-#recipe {
+/*#recipe {
     padding-top:4px;
     padding-left:18px;
-}
+}*/
 
-#recipe>li {
+.recipe {
     font-weight: 400;
     padding-top:4px;
 }
