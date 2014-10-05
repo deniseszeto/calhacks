@@ -26,7 +26,7 @@ def createCart(toolsList=[]):
     returnList = []
     epsilon, prodUrl = 0, ""
     for tool in toolsList:
-        xml = ET.parse(urlopen(url + "&query=" + tool))
+        xml = ET.parse(urlopen(url + "&query=" + tool.replace(" ", "+")))
         root = xml.getroot()
         if root.find("totalResults").text != "0":
             for item in xml.find("items").findall("item"):
