@@ -4,6 +4,10 @@ from urllib.request import urlopen
 from xml.dom.minidom import parse
 from random import randint
 
+def parseList(xml, tag):
+    """ Returns a list of elements in the parsed xml by tag name. """
+    return xml.getElementsByTagName(tag)
+    
 def parsePage(url, tags=[]):
     """ Returns the parsed xml and optionally the value of a tag. """
     
@@ -49,7 +53,7 @@ def findRecipe(keywords="Calhacks"):
     xml, [title, inst] = parsePage(recipe_url, ['Title', 'Instructions'])
 
     recipe_list = set()
-    for el in xml.getElementsByTagName('Name'):
+    for el in parseList(xml, 'Name'):
         recipe_list.add(el.firstChild.nodeValue)
 
     return title, recipe_list, inst
