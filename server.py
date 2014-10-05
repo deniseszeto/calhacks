@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods = ["GET", "POST"])
 def main_page():
     if request.method == "GET":
-        return render_template('index.html', input="", recipename="Beer Eggs", ingred=set(), recipe="")
+        return render_template('index.html', input="", recipename="", ingred=set(), recipe="")
     else:
         inputrecipe = request.form['input']
         name, ingredients, instructions = findRecipe(inputrecipe)

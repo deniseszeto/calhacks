@@ -65,7 +65,9 @@
             <div class="row-fluid">
                 <div class="col-md-4">
                     <h3>{{ recipename }}</h3>
+                    {% if ingred %}
                     Ingredients
+                    {% endif %}
                     <form class="form-horizontal" role="form">
                         {% for item in ingred %}
                         <div class="checkbox">
@@ -76,7 +78,9 @@
                         </div>
                         {% endfor %}
                     </form>
-                    Recipe:
+                    {% if recipe %}
+                    Recipe
+                    {% endif %}
                     <p class="recipe">
                     {{ recipe }}
                     </p>
