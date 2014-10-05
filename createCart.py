@@ -25,12 +25,18 @@ def createCart (objectList):
 	objectIds =[]
 
 	for elem in objectList:
-		elem = elem.replace(" ",",")
+		elem = elem.strip()
+		elem = elem.strip(",")
+		elem = elem.replace(" ","_")
 		xml = querySearch(elem)
 		searchList = xml.getElementsByTagName("Item")
 		maxval = [0, None]
 		for item in searchList:
-			itemId = item.getElementsByTagName("OfferListingId")[0].firstChild.nodeValue
+			curr = item.getElementsByTagName("OfferListingId")
+			if (curr is None or len(curr) == 0):
+				continue
+
+			itemId = curr[0].firstChild.nodeValue
 			primeFlag = item.getElementsByTagName("IsEligibleForSuperSaverShipping")[0].firstChild.nodeValue
 
 			listPrice = item.getElementsByTagName("Price")[0].getElementsByTagName("FormattedPrice")[0].firstChild.nodeValue
