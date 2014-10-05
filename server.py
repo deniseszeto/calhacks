@@ -12,4 +12,5 @@ def main_page():
         inputrecipe = request.form['input']
         print(inputrecipe)
         name, ingredients, instructions = findRecipe(inputrecipe)
+        print(name)
         return render_template('index.html', input=inputrecipe, recipename=name)
