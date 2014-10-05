@@ -167,10 +167,8 @@
     function setLocation(position) 
       {
         {% if address %}
-        y.src = "https://www.google.com/maps/embed/v1/directions?
-                 origin="+position.coords.latitude +"%2C"+position.coords.longitude+
-               "&destination={{address}}
-                &key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
+        y.src = "https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+
+               "&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;
         document.getElementById("long").value=position.coords.longitude;
