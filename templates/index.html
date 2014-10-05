@@ -52,7 +52,11 @@
             </div>
             <div>
                 <form role="form" action="/" method="POST">
-                    <input type="text" class="form-control " id="recipe" placeholder="What do you want to make?" name="input" value="{{ input }}">
+                    <input type="text" id="lat" name="lat" hidden>
+                    <input type="text" id="long" name="long" hidden>
+                    <input type="text" class="form-control " id="recipe" name="input"
+                     placeholder="What do you want to make?" value="{{ input }}">
+                    <input type="submit" value="Submit" hidden>
                 </form>
             </div>
             <!-- /.navbar-collapse -->
@@ -62,8 +66,9 @@
 
     <!-- Header -->
     <div class="body">
-
+        {% if address %}
         <div id="backgroundcolor"></div>
+        {% endif %}
         <div class="container">
             <div class="row-fluid">
                 <div class="col-md-4">
@@ -90,8 +95,13 @@
                 </div>
 
                 <div class="col-md-7 col-md-offset-1">
+                    {% if address %}
                     Buy yo shit here<br>
-                    <iframe allowtransparency="true" style="background: #E9E5DC;" width="100%" height="450" frameborder="0" style="border:0" id ="gmap"></iframe>
+                    <iframe allowtransparency="true" style="background: #E9E5DC;"
+                     width="100%" height="70%" frameborder="0" style="border:0" id ="gmap"></iframe>
+                    {% else %}
+                    <div style="margin: 0;padding: 0;border: 0;overflow: hidden;height: 100%; max-height: 100%;"> </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -138,7 +148,9 @@
 
     <script>
     var x=document.getElementById("demo");
+    {% if address %}
     var y=document.getElementById("gmap");
+    {% endif %}
     function getLocation()
       {
         console.log("got location");
@@ -150,9 +162,14 @@
       }
     function setLocation(position) 
       {
-        y.src="https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+"&destination=Safeway%2C%20Shattuck%20Place%2C%20Berkeley%2C%20CA%2C%20United%20States&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
+        {% if address %}
+        y.src="https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+"&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
+        {% endif %}
+        document.getElementById("lat").value=position.coords.latitude;
+        document.getElementById("long").value=position.coords.longitude;
       }
-    window.onload = function(){getLocation();};
+        window.onload = function(){getLocation();};
+      
     </script>
 </body>
 
