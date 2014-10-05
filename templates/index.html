@@ -27,118 +27,120 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    {% if address %}
+    ::-webkit-scrollbar { 
+        display: block;
+        background-color: #f8f8f8;
+    }
+    body {
+        overflow:visible;
+    }
+    {% else %}
+    ::-webkit-scrollbar { 
+        display: none; 
+    }
+    body {
+        overflow:hidden;
+    }
+    {% endif %}
+    </style>
 
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container" id="navbar_container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div>
-                <img src="{{ url_for('static', filename='favicon66.png') }}" id ="logo">
-            </div>
-            <div class="navbar-header">
-            <a class="navbar-brand" href="#">Some Recipe-Related Name</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <form role="form" action="/" method="POST">
-                    <input type="text" id="lat" name="lat" hidden>
-                    <input type="text" id="long" name="long" hidden>
-                    <input type="text" class="form-control " id="recipe" name="input"
-                     placeholder="What do you want to make?" value="{{ input }}">
-                    <input type="submit" value="Submit" hidden>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Header -->
-    <div class="body">
-        {% if address %}
-        <div id="backgroundcolor"></div>
-        {% endif %}
-        <div class="container">
-            <div class="row-fluid">
-                <div class="col-md-4">
-                    <h3>{{ recipename }}</h3>
-                    {% if ingred %}
-                    Ingredients
-                    {% endif %}
-                    <form class="form-horizontal" role="form">
-                        {% for item in ingred %}
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="">
-                            {{ item }}
-                          </label>
-                        </div>
-                        {% endfor %}
-                    </form>
-                    {% if recipe %}
-                    Recipe
-                    {% endif %}
-                    <p class="recipe">
-                    {{ recipe }}
-                    </p>
+    <div id="wrap">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container" id="navbar_container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div>
+                    <img src="{{ url_for('static', filename='favicon66.png') }}" id ="logo">
                 </div>
-
-                <div class="col-md-7 col-md-offset-1">
-                    {% if address %}
-                    <br>
-                    <iframe allowtransparency="true" style="background: #E9E5DC;"
-                     width="100%" height="70%" frameborder="0" style="border:0" id ="gmap"></iframe>
-                    {% else %}
-                    <div id="space"></div>
-                    {% endif %}
+                <div class="navbar-header">
+                <a class="navbar-brand" href="#">Some Recipe-Related Name</a>
                 </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.intro-header -->
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row footerrow">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#home">Home</a>
+                            <a href="#">Help</a>
                         </li>
-                        <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
+                            <a href="#">About</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Made at Cal Hacks 2014. </p>
                 </div>
+                <div>
+                    <form role="form" action="/" method="POST">
+                        <input type="text" id="lat" name="lat" hidden>
+                        <input type="text" id="long" name="long" hidden>
+                        <input type="text" class="form-control " id="recipe" name="input"
+                         placeholder="What do you want to make?" value="{{ input }}">
+                        <input type="submit" value="Submit" hidden>
+                    </form>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
+            <!-- /.container -->
+        </nav>
+
+        <!-- Header -->
+        <div class="body">
+            <div class="container">
+            {% if address %}
+            <div id="backgroundcolor"></div>
+            {% endif %}
+                <div class="row-fluid">
+                    <div class="col-md-4">
+                        <h3>{{ recipename }}</h3>
+                        {% if ingred %}
+                        Ingredients
+                        {% endif %}
+                        <form class="form-horizontal" role="form">
+                            {% for item in ingred %}
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="">
+                                {{ item }}
+                              </label>
+                            </div>
+                            {% endfor %}
+                        </form>
+                        {% if recipe %}
+                        Recipe
+                        {% endif %}
+                        <p class="recipe">
+                        {{ recipe }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-7 col-md-offset-1">
+                        {% if address %}
+                        <br>
+                        <iframe allowtransparency="true" style="background: #E9E5DC;"
+                         width="100%" height="70%" frameborder="0" style="border:0" id ="gmap"></iframe>
+                        {% else %}
+                        <div id="space"></div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container -->
+
         </div>
-    </footer>
+        <!-- /.intro-header -->
+        <div id="push"></div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">Made at Cal Hacks 2014.</p>
+      </div>
+    </div>
+
 
     <!-- jQuery Version 1.11.0 -->
     <script src="{{ url_for('static', filename='js/jquery-1.11.0.js') }}"></script>
@@ -150,10 +152,6 @@
     var x=document.getElementById("demo");
     {% if address %}
     var y=document.getElementById("gmap");
-    {% else %}
-    $(document).ready(function(){
-        $('#space').height($(window).height()-98-88-21-50-1);
-    });
     {% endif %}
     function getLocation()
       {
