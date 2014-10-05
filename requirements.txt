@@ -2,5 +2,5 @@ Setuptools==5.4.1
 Pip==1.5.6
 Flask==0.10.1
 Jinja2==2.7.3
-Werkzeug==0.8.3
-gunicorn==0.17.2
+Werkzeug==0.9.6
+gunicorn==19.0.0
