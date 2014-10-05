@@ -147,7 +147,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    
+
     <script>
     var x=document.getElementById("demo");
     {% if address %}
@@ -166,7 +166,7 @@
       {
         {% if address %}
         y.src = "https://www.google.com/maps/embed/v1/directions?origin="+position.coords.latitude +"%2C"+position.coords.longitude+
-               "&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4&output=embed";
+               "&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4";
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;
         document.getElementById("long").value=position.coords.longitude;
