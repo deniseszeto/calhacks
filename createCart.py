@@ -21,12 +21,14 @@ def getXML (keyword):
 		Availability='Available',
 		Keywords = keyword,
 		AWSAccessKeyId=AWS_KEY)
-	url_params['Timestamp'] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+	amzdate = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+	url_params['Timestamp'] = amzdate
 	url_params = sorted(url_params.items(), key=operator.itemgetter(0))
 
 	url_string = urlencode(url_params)
 
-	amzdate = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+	amzdate = amzdate.replace("-", "")
+	amzdate = amzdate.replace(":", "")
 	datestamp = time.strftime("%Y%m%d", time.gmtime())
 	string_to_sign = stringToSign (amzdate, datestamp, url_string)
 
@@ -43,30 +45,6 @@ def getXML (keyword):
 	page = urlopen(url)
 	xml = parse(page)
 	return xml
-
-	'''
-	canonical_querystring = "?Service=AWSECommerceService"
-
-	canonical_querystring += "&AWSAccessKeyId=" + AWS_KEY + "&Operation=ItemSearch&Availability=Available&SearchIndex=Kitchen"
-
-	canonical_querystring += "&Keywords=" + keyword
-
-	amzdate = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-	canonical_querystring += "&Timestamp=" + amzdate
-
-	datestamp = time.strftime("%Y%m%d", time.gmtime())
-	sigKey = getSignatureKey(AWS_SECRET_KEY, amzdate, "us-west-1", "iam")
-	
-	string = stringToSign(amzdate, datestamp, canonical_querystring)
-
-	code = sign (sigKey, string)
-	url += canonical_querystring + "&Signature=" + ''.join('{:02x}'.format(x) for x in code)
-
-	print(url)
-	page = urlopen(url)
-	xml = parse(page)
-	return xml
-	'''
 
 def sign(key, msg):
 	return hmac.new(key, msg.encode("utf-8"), hashlib.sha256).digest()
