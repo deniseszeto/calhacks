@@ -10,5 +10,6 @@ def main_page():
         return render_template('index.html', input="", recipename="Beer Eggs")
     else:
         inputrecipe = request.form['input']
+        print(inputrecipe)
         name, ingredients, instructions = findRecipe(inputrecipe)
         return render_template('index.html', input=inputrecipe, recipename=name)
