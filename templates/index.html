@@ -158,7 +158,7 @@
         {% if address %}
         $map = $('#mapgoeshere');
         if ($map.children().length == 0) {
-            $('<iframe width="100%" height="70%" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin='+position.coords.latitude +"%2C"+position.coords.longitude+'&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4">').appendTo($('#mapgoeshere'));
+            $('<iframe width="100%" height="'+($(window).height()-200)+'px" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/directions?origin='+position.coords.latitude +"%2C"+position.coords.longitude+'&destination={{address}}&key=AIzaSyA7UZaE5lCotDi8pWfLRYEAwHKr1KtqSJ4">').appendTo($('#mapgoeshere'));
         }
         {% endif %}
         document.getElementById("lat").value=position.coords.latitude;
