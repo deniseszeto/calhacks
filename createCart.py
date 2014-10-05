@@ -47,9 +47,13 @@ def createCart (objectList):
 			if val > maxval[0]:
 				maxval[0] = val
 				maxval[1] = itemId
-		objectIds.append(maxval[1])
+		if maxval[1] != None:
+			objectIds.append(maxval[1])
 
 	cart = queryCartCreate(objectIds)
+	if (len(cart.getElementsByTagName("PurchaseURL")) ==0):
+		return None
+
 	return cart.getElementsByTagName("PurchaseURL")[0].firstChild.nodeValue
 		
 
