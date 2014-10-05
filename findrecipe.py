@@ -22,7 +22,7 @@ def parsePage(url, tags=[]):
     return xml, tags
 
 def findRecipe(keywords="Calhacks"):
-    """ Returns (Recipe Name, Set of Ingredients, Instructions). """
+    """ Returns (Recipe, Set of Ingredients, Cuisine Type, Instructions). """
     
     apiKey = "dvxI9e588cOKNvbOzd24EXsVRW9Y2OW8"
 
@@ -39,21 +39,26 @@ def findRecipe(keywords="Calhacks"):
     
     # No recipes are found. 
     if recipeCount == "0":
-        return keywords, set(["No such recipe found"]), ""
+        return keywords, set(["No such recipe found"]), "", ""
 
     randomRecipe = randint(1, int(recipeCount))
     url = url.replace("pg=0", "pg=" + str(randomRecipe))
 
-    recipeID = parsePage(url, ['RecipeID'])[1][0]
+    recipeId = parsePage(url, ['RecipeID'])[1][0]
+
+    try:
+        cuisineType = parsePage(url, ['Cuisine'])[1][0]
+    except:
+        cuisineType = ""
     
     # Return the list of ingredients in the Recipe
-    recipe_url = "http://api.bigoven.com/recipe/" + recipeID
-    recipe_url += "?api_key=" + apiKey
+    recipeUrl = "http://api.bigoven.com/recipe/" + recipeId
+    recipeUrl += "?api_key=" + apiKey
 
-    xml, [title, inst] = parsePage(recipe_url, ['Title', 'Instructions'])
+    xml, [title, inst] = parsePage(recipeUrl, ['Title', 'Instructions'])
 
-    recipe_list = set()
+    recipeList = set()
     for el in parseList(xml, 'Name'):
-        recipe_list.add(el.firstChild.nodeValue)
+        recipeList.add(el.firstChild.nodeValue)
 
-    return title, recipe_list, inst
+    return title, recipeList, cuisineType, inst
