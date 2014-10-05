@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Some Recipe-Related Name</title>
+    <title>FoodHax</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
@@ -59,7 +59,7 @@
                     <img src="{{ url_for('static', filename='favicon66.png') }}" id ="logo">
                 </div>
                 <div class="navbar-header">
-                <div class="navbar-brand" style="color: #333;">Some Recipe-Related Name</div>
+                <div class="navbar-brand" style="color: #333;">FoodHax</div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse desktop-only" id="bs-example-navbar-collapse-1">
@@ -94,7 +94,7 @@
                 {% endif %}
                 <div class="row-fluid">
                     <div class="col-md-4">
-                        <h4>{{ recipename }}</h4>
+                        <h4 id="recipename">{{ recipename }}</h4>
                         {% if ingred %}
                         Ingredients
                         {% endif %}
@@ -131,13 +131,37 @@
 
     <div id="footer">
         <div class="container desktop-only">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                  <li>
-                    <p class="text-muted">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</p>
-                  </li>
-                </ul>
-            </div>
+            <form action="/list" method="POST">
+                <div class="searchbar" style="float:left;width:40%;">
+
+                    <input type="text" style="width:50%;float: left;" class="form-control " id="shoppinglist" name="shoppinglist" placeholder="What items do you need to buy?" value= "{{ needtobuy }}">
+                    <input type="submit" style="width:20%;float: left;margin: 3px;" id="walmart" name="walmart" value="Walmart"
+                    {% if walmart %}
+                        data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" data-content="
+                        {% for link in walmart %}
+                        <p><a href='{{ link[1] }}'> {{ link[0] }}</a></p>
+                        {% endfor %}
+                        "
+                    {% endif %}
+                    >
+
+                    <input type="submit" style="width:20%;float: left;margin: 3px;" name="amazon" id="amazon" value="Amazon"
+                    {% if amazon %}
+                        data-container="body" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" data-content="
+                        <p><a href='{{ amazon }}'><img src='https://images-na.ssl-images-amazon.com/images/G/01/x-locale/communities/reminder/v2/continue._V192249955_.gif' border='0' alt='Go to Amazon Cart'></a></p>
+                        "
+                    {% endif %}
+                    >
+                    <input type="text" name="inputx" value="{{ input }}" hidden>
+                    <input type="text" name="recipenamex" value="{{ recipename }}" hidden>
+                    <input type="text" name="ingredx" value="{{ ingred }}" hidden>
+                    <input type="text" name="ingredstrx" value="{{ ingredstr }}" hidden>
+                    <input type="text" name="recipex" value="{{ recipe }}" hidden>
+                    <input type="text" name="addressx" value="{{ address }}" hidden>
+                </div>
+            </form>
+            
+            <span class="text-muted" style="float:right;padding-top:7px;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
         </div>
         <div class="container mobile-only">
             <span class="text-muted" style="float:left;">Made at <a href="http://www.calhacks.io/">Cal Hacks 2014</a>.</span>
@@ -163,6 +187,9 @@
                 <li>
                     We'll show you the closest grocery store to buy the remaining ingredients!
                 </li>
+                <li class="desktop-only">
+                   Or you can type the items that you're missing into the textbox, and we'll generate an Amazon list for you!
+                </li>
             </ol>
           </div>
         </div>
@@ -177,12 +204,13 @@
             <h4 class="modal-title" id="AboutLabel">About Us</h4>
           </div>
           <div class="modal-body">
-            <p>This web app makes use of the BigOven, Supermarket, Google Maps, Google Places, and AWS APIs.</p>
+            <p>This web app makes use of the BigOven, Google Maps, Google Places, AWS, and Walmart APIs.</p>
             <p>Developed by Jackson Chang, Jinsu Choi, Kai Si, and Denise Szeto at Cal Hacks 2014.</p>
           </div>
         </div>
       </div>
     </div>
+
 
     <!-- jQuery Version 1.11.0 -->
     <script src="{{ url_for('static', filename='js/jquery-1.11.0.js') }}"></script>
@@ -214,6 +242,12 @@
       }
       window.onload = function(){getLocation();};
       
+    {% if walmart %}
+        $("#walmart").popover('show');
+    {% endif %}
+    {% if amazon %}
+        $("#amazon").popover('show');
+    {% endif %}
     </script>
 
 </body>

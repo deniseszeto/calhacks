@@ -111,13 +111,13 @@ h6 {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -40px;
+    margin: 0 auto -54px;
 }
 
 #push,
 #footer {
     padding: 10px 0px;
-    height: 40px;
+    height: 54px;
 }
 #footer {
     position: relative;
